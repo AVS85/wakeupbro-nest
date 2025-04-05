@@ -1,0 +1,28 @@
+{
+  "response_format": {
+  "type": "json_schema",
+  "json_schema": {
+      "name": "joke_response",
+      "strict": "true",
+      "schema": {
+          "type": "object",
+          "properties": {
+              "date": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "Дата в формате YYYY-MM-DDTHH:mm"
+              },
+              "action": {
+                  "type": "string",
+                  "description": "Описание действия"
+              }
+          },
+          "required": [
+              "date",
+              "action"
+          ],
+          "additionalProperties": false
+      }
+  }
+}
+}
