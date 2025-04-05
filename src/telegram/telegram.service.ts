@@ -17,6 +17,9 @@ export class TelegramService implements OnModuleInit {
   private initializeBot() {
     // Обработка текстовых сообщений
     this.bot.on(message('text'), (ctx) => {
+      // Здесь можно добавить обработку текстовых сообщений, например, отправить ответный текст
+      console.log(`Получено сообщение от пользователя ${ctx.from.first_name}`);
+
       ctx.reply(`Вы написали: ${ctx.message.text}`);
     });
 
