@@ -16,33 +16,18 @@ export class TelegramService implements OnModuleInit {
 
   private initializeBot() {
     // Обработка текстовых сообщений
-    this.bot.on(message('text'), (ctx) => {
+    this.bot.on(message('text'), async (ctx) => {
       // Здесь можно добавить обработку текстовых сообщений, например, отправить ответный текст
       console.log(`Получено сообщение от пользователя ${ctx.from.first_name}`);
 
-      ctx.reply(`Вы написали: ${ctx.message.text}`);
+      await ctx.reply(`Вы написали: ${ctx.message.text}`);
+      return;
     });
 
     // Обработка аудиофайлов
-    this.bot.on(message('audio'), (ctx) => {
-      ctx.reply('Вы отправили аудиофайл.');
+    this.bot.on(message('audio'), async (ctx) => {
+      await ctx.reply('Вы отправили аудиофайл.');
       // Здесь можно добавить обработку аудиофайла, например, сохранить его или проанализировать
-    });
-
-    // Обработка голосовых сообщений
-    this.bot.on(message('voice'), async (ctx) => {
-      const voice = ctx.message.voice;
-      if (voice) {
-        const fileId = voice.file_id;
-
-        // Получение файла
-        const fileLink = await this.bot.telegram.getFileLink(fileId);
-        ctx.reply(
-          'Вы отправили голосовое сообщение. Вот ссылка на файл: ' + fileLink,
-        );
-
-        // Здесь можно добавить дополнительную обработку, например, сохранить файл или транскрибировать его
-      }
     });
 
     // Запуск бота
